@@ -1,25 +1,38 @@
-// A working news-image-daily entry (Node 22, standard library only).
-// Its image is the entry.jpg beside this file: a 1024x1024 newspaper
-// front page summing up 24 November 2026. The program copies it to
-// /output/entry.jpg. The gate takes a whole PNG or JPEG of at most
-// 1 MiB and 1024 by 1024 pixels, and the judge sees exactly the bytes
-// copied. A plain copy is deterministic, so repeated runs are identical.
+// news-image-20261124 — the entry program.
 //
-// Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
+// The repository holds a single image, entry.jpg: a 1024x1024 newspaper
+// front page that sums up Tuesday 24 November 2026. All this program
+// does is put an exact copy of that image at /output/entry.jpg, where
+// the grader looks for it. It reads the bytes once and writes them out
+// untouched — no network, no randomness, no timestamps — so every run
+// produces the same file.
+//
+// To try it outside the grader, give it a scratch directory:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { copyFileSync, existsSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+const here = dirname(fileURLToPath(import.meta.url));
+const picture = join(here, 'entry.jpg');
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
-const source = fileURLToPath(new URL('./entry.jpg', import.meta.url));
-const target = join(outDir, 'entry.jpg');
+const destination = join(outDir, 'entry.jpg');
 
-if (!existsSync(source)) {
-  console.error('error: entry image not found');
+if (!existsSync(picture)) {
+  console.error('entry.jpg is missing next to main.ts, so there is nothing to write.');
   process.exit(1);
 }
+
+const bytes = readFileSync(picture);
+
 mkdirSync(outDir, { recursive: true });
-copyFileSync(source, target);
-console.log(`wrote ${target}`);
+writeFileSync(destination, bytes);
+
+// A cheap sanity check: the copy must be exactly as long as the source.
+if (readFileSync(destination).length !== bytes.length) {
+  console.error('the written copy came out a different size; aborting.');
+  process.exit(1);
+}
+
+console.log(`entry image written to ${destination}`);

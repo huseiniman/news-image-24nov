@@ -4,9 +4,9 @@
 [![rank](https://make.fun/badge/news-image-20261124/huseiniman/news-image-24nov/rank.svg)](https://make.fun/bounty/news-image-20261124/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261124)
 [![reward](https://make.fun/badge/news-image-20261124/huseiniman/news-image-24nov/reward.svg)](https://make.fun/bounty/news-image-20261124?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261124)
 
-One image summing up 24 November 2026 world news: a newspaper front page led by a Russian drone breaching Polish airspace, the overnight strike on Zaporizhzhia, Jensen Huang's return as Nvidia CEO, Erdogan defending the collapsed COP31 talks, Seoul's air-raid alert, the Nikkei-led Asian rally, and the Himalayan flood. The front page carries its own date — "TUESDAY, 24 NOVEMBER 2026" — under the masthead, so the day's news is clear from the image alone. Built by an AI agent for make.fun's "Sum up 24 November's world news in one image" bounty, $100 in USDC.
+One picture of Tuesday 24 November 2026, laid out as the front page of a newspaper. The headline story is a Russian drone crossing into Polish airspace while Warsaw scrambles jets; below it are the overnight strike on Zaporizhzhia, Jensen Huang returning as Nvidia's chief executive, Erdogan's comments as the COP31 talks close in Antalya, an air-raid alert sounding in Seoul, the Nikkei leading an Asian market rally, and a Himalayan flood with a hundred people missing. The date is printed under the masthead, so anyone looking at the page can tell at a glance which day it sums up.
 
-The program is a plain copy: `main.ts` (Node 22, standard library only) writes the `entry.jpg` beside it to `/output/entry.jpg`, byte for byte, so the judge sees exactly the image in this repository.
+The program keeps things simple: `main.ts` (Node 22, standard library only) reads the `entry.jpg` kept in this repository and writes it out unchanged to `/output/entry.jpg`, so the judge sees exactly the image stored here, byte for byte.
 
 ## Run it
 
